@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\KelolaController;
 use App\Http\Controllers\ProfileController;
 
@@ -53,3 +54,19 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/book/create', [BookController::class, 'create'])->name('book');
 
+Auth::routes();
+$user=Auth::user();
+$user=Auth::id();
+if(Auth::check())
+{
+    //pengguna telah masuk
+}
+Route::get('profile', function(){
+    //hanya pengguna yang dapat mengakses routes ini
+})->middleware('auth');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/profil', [App\Http\Controllers\HomeController::class, 'profil'])->name('profil');
+
+Route::get('admin/home', [\App\Http\Controllers\AdminController::class, 'index'])
+->name('admin.home')
+->middleware('is_admin');
