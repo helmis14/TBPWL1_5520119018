@@ -26,3 +26,11 @@ Route::get('/admin/books', [Admin::class, 'books'])
 Route::post('/admin/books', [Admin::class, 'submit_book'])
     ->name('admin.book.submit')
     ->middleware('is_admin');
+
+Route::patch('admin/books/update', [App\Http\Controllers\AdminController::class, 'update_book'])
+    ->name('admin.book.update')
+    ->middleware('is_admin');
+
+Route::get('/admin/api/dataBuku/{id}', [Admin::class, 'getDataBuku'])
+    ->name('api.book')
+    ->middleware('is_admin');

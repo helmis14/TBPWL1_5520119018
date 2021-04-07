@@ -53,4 +53,13 @@ class AdminController extends Controller
 
         return redirect()->route('admin.books')->with($notification);
     }
+
+    public function getDataBuku($id)
+    {
+        // Pengambilan buku berdasarkan id
+        $buku = Book::find($id);
+
+        // Mengembalikan buku dengan format json
+        return response()->json($buku);
+    }
 }
