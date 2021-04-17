@@ -46,7 +46,7 @@
                                         <div class="btn-group" role="group" ariaa-label="Basic example">
                                             <button type="button" id="btn-edit-buku" class="btn btn-success" data-toggle="modal" data-target="#editBukuModal" data-id="{{$book->id}}">Edit</button>
 
-                                            <button type="button" id="btn-delete-buku" class="btn btn-danger">Hapus</button>
+                                            <button type="button" id="btn-delete-buku" class="btn btn-danger" data-toggle="modal" data-target="#deleteBukuModal" data-id="{{$book->id}}" data-cover="{{$book->cover}}">Hapus</button>
 
                                         </div>
                                     </td>
@@ -158,6 +158,34 @@
         </div>
     </div>
     {{-- end Modal edit buku--}}
+
+    {{-- Modal Delete Buku --}}
+    <div class="modal fade" id="deleteBukuModal" tabindex="-1" aria-labelledby="editBukuLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editBukuLabel">{{ _('Hapus Data Buku') }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Apakah anda yakin akan menghapus data tersebut ?
+                        <form method="POST" action="{{ route('admin.book.delete') }}" enctype="multipart/form-data">
+                            @method('DELETE')
+                            @csrf
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="delete-id" name="id">
+                        <input type="hidden" id="delete-old-cover" name="old_cover">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- end Modal Delete Buku --}}
 @stop
 
 @section('js')
@@ -171,6 +199,7 @@
                 url: `${baseUrl}/admin/api/dataBuku/${id}`,
                 dataType: "JSON",
                 success: function(res){
+                    $('#editId').val(res.id);
                     $('#editJudul').val(res.judul);
                     $('#editPenerbit').val(res.penerbit);
                     $('#editTahun').val(res.tahun);
@@ -184,6 +213,13 @@
                 },
             });
         });
+
+        $(document).on('click', '#btn-delete-buku', function(){
+            let id = $(this).data('id');
+            let cover = $(this).data('cover');
+            $('#delete-id').val(id);
+            $('#delete-old-cover').val(cover);
+        })
     });
 </script>
 @stop

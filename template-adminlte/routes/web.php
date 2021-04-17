@@ -34,3 +34,7 @@ Route::patch('admin/books/update', [App\Http\Controllers\AdminController::class,
 Route::get('/admin/api/dataBuku/{id}', [Admin::class, 'getDataBuku'])
     ->name('api.book')
     ->middleware('is_admin');
+
+Route::delete('admin/books/delete', [App\Http\Controllers\AdminController::class, 'delete_book'])
+    ->name('admin.book.delete')
+    ->middleware('is_admin');
