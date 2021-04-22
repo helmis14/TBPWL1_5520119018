@@ -21,7 +21,7 @@ class CreateBooksTable extends Migration
             $table->string('penerbit');
             $table->string('cover')->nullable();
             $table->timestamps();
-        });
+        });      
     }
 
     /**

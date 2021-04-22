@@ -232,12 +232,6 @@ return [
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text' => 'Buku',
-            'url'  => 'admin/books',
-            'icon' => 'fas fa-fw fa-book',
             'can'  => 'isAdmin',
         ],
         [
@@ -247,15 +241,21 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Buku',
+            'url'         => 'admin/books',
+            'icon'        => 'fas fa-fw fa-book',
+            'can'         => 'isAdmin',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'url'  => 'profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'url'  => 'profile',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
